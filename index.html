@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VidaNatural - Centro Naturista | 2026</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/593990318500?text=Hola%20VidaNatural,%20tengo%20una%20consulta%20sobre%20sus%20productos" 
+       class="whatsapp-btn" target="_blank">
+        <i class="bi bi-whatsapp"></i>
+    </a>
+    
+    <!-- Carrito Overlay -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    
+    <!-- Carrito Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4><i class="bi bi-cart3"></i> Mi Carrito</h4>
+            <button type="button" class="btn-close" id="closeCartBtn"></button>
+        </div>
+        
+        <div id="cartItems">
+            <div class="text-center py-4">
+                <i class="bi bi-cart-x display-4 text-muted"></i>
+                <p class="text-muted mt-3">Tu carrito está vacío</p>
+            </div>
+        </div>
+        
+        <div class="cart-summary mt-4 pt-4 border-top">
+            <div class="d-flex justify-content-between mb-2">
+                <span>Subtotal:</span>
+                <span id="cartSubtotal">$0.00</span>
+            </div>
+            <div class="d-flex justify-content-between mb-4">
+                <span>Envío:</span>
+                <span id="cartShipping">$3.50</span>
+            </div>
+            <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
+                <span>Total:</span>
+                <span id="cartTotal">$3.50</span>
+            </div>
+            
+            <button class="btn btn-primary w-100 mb-3" id="checkoutBtn">Proceder al Pago</button>
+            <button class="btn btn-outline-primary w-100" id="continueShoppingBtn">Seguir Comprando</button>
+        </div>
+        
+        <div class="mt-4">
+            <h6 class="mb-3">Métodos de Pago Aceptados</h6>
+            <div class="d-flex flex-wrap">
+                <i class="bi bi-credit-card fs-4 me-3 text-muted"></i>
+                <i class="bi bi-paypal fs-4 me-3 text-muted"></i>
+                <i class="bi bi-bank fs-4 me-3 text-muted"></i>
+                <i class="bi bi-cash-coin fs-4 me-3 text-muted"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-flower1 me-2"></i>VidaNatural
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productos">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex align-items-center">
+                    <div class="input-group me-3 d-none d-md-flex">
+                        <input type="text" class="form-control form-control-sm" placeholder="Buscar productos...">
+                        <button class="btn btn-outline-primary btn-sm" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    
+                    <button class="btn btn-outline-primary position-relative me-2" id="openCartBtn">
+                        <i class="bi bi-cart3"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+                    </button>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Mi Cuenta</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-heart me-2"></i>Mis Favoritos</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+        <!-- Carrusel Hero (reemplaza la sección Hero actual) -->
+<div id="heroCarousel" class="carousel slide carousel-hero" data-bs-ride="carousel">
+    <!-- Indicadores -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+    
+    <!-- Slides del Carrusel -->
+    <div class="carousel-inner">
+        
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(42, 107, 74, 0.8), rgba(42, 107, 74, 0.9)), url('https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');">
+                <div class="container">
+                    <div class="row align-items-center min-vh-70">
+                        <div class="col-lg-6">
+                            <h1 class="display-4 fw-bold mb-4 text-white">Bienestar Natural para tu Vida 2026</h1>
+                            <p class="lead mb-4 text-white">Descubre productos naturales certificados, respaldados por la ciencia y creados con sostenibilidad.</p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="#productos" class="btn btn-primary btn-lg">Ver Productos</a>
+                                <a href="#nosotros" class="btn btn-outline-light btn-lg">Conócenos</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="text-center">
+                                <i class="bi bi-shield-check display-1 text-white opacity-75"></i>
+                                <p class="mt-3 text-white">Compra 100% segura</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(42, 107, 74, 0.8), rgba(42, 107, 74, 0.9)), url('https://studyfinds.org/wp-content/uploads/2020/07/AdobeStock_216012867-scaled.jpeg');">
+                <div class="container">
+                    <div class="row align-items-center min-vh-70">
+                        <div class="col-lg-6">
+                            <span class="badge bg-warning text-dark fs-5 mb-3">OFERTA ESPECIAL</span>
+                            <h1 class="display-4 fw-bold mb-4 text-white">20% Descuento en Suplementos</h1>
+                            <p class="lead mb-4 text-white">Fortalece tu salud con nuestros suplementos naturales premium.</p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="#productos" class="btn btn-success btn-lg">Ver Ofertas</a>
+                                <a href="#" class="btn btn-outline-light btn-lg">Consultar</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="text-center">
+                                <i class="bi bi-percent display-1 text-white opacity-75"></i>
+                                <p class="mt-3 text-white">Promoción limitada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="hero-slide" style="background-image: linear-gradient(rgba(42, 107, 74, 0.8), rgba(42, 107, 74, 0.9)), url('https://imagenes.elpais.com/resizer/v2/GOQGLC3A3VGGTCR4IP7LYPB74A.png?auth=2ac2ac6ceaefe841f444ef14aa5237ec4bc31b4cfdb7de2a3350e04099a8b8fd&width=1000');">
+                <div class="container">
+                    <div class="row align-items-center min-vh-70">
+                        <div class="col-lg-6">
+                            <span class="badge bg-info fs-5 mb-3">NOVEDAD</span>
+                            <h1 class="display-4 fw-bold mb-4 text-white">Nueva Línea de Cuidado Facial</h1>
+                            <p class="lead mb-4 text-white">Ingredientes amazónicos para una piel radiante y saludable.</p>
+                            <div class="d-flex flex-wrap gap-3">
+                                <a href="#productos" class="btn btn-primary btn-lg">Descubrir</a>
+                                <a href="#blog" class="btn btn-outline-light btn-lg">Consejos</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-none d-lg-block">
+                            <div class="text-center">
+                                <i class="bi bi-stars display-1 text-white opacity-75"></i>
+                                <p class="mt-3 text-white">Productos innovadores</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Controles del Carrusel -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>
+    </section>
+
+    <!-- Catálogo de Productos -->
+    <section class="py-5" id="productos">
+        <!-- Carrusel de Productos -->
+<div class="container my-5">
+    <h2 class="section-title mb-4">Productos Destacados</h2>
+    
+    <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            
+            <!-- Grupo 1 -->
+            <div class="carousel-item active">
+                <div class="row g-4">
+                    <!-- Producto 1 -->
+                    <div class="col-md-3">
+                        <div class="card product-card h-100">
+                            <img src="https://portaluchile.uchile.cl//.imaging/default/dam/imagenes/Uchile/VEXCOM/2023/OCTUBRE-2023/quemadores.zip/4-Quemadores-de-grasa/Quemadores-de-grasa-4-L.jpg/jcr:content.jpg" 
+                                 class="card-img-top" alt="Quemador Natural">
+                            <div class="card-body">
+                                <h5 class="card-title">Quemador Natural</h5>
+                                <p class="card-text">Acelera el metabolismo naturalmente.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$32.99</span>
+                                    <button class="btn btn-primary btn-sm">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 2 -->
+                    <div class="col-md-3">
+                        <div class="card product-card h-100">
+                            <img src="https://images.freeimages.com/variants/LKALcmSwcvVpY4p43A75PduN/f4a36f6589a0e50e702740b15352bc00e4bfaf6f58bd4db850e167794d05993d?fmt=webp&h=350" 
+                                 class="card-img-top" alt="Crema Facial">
+                            <div class="card-body">
+                                <h5 class="card-title">Crema de Árgan</h5>
+                                <p class="card-text">Hidratación profunda orgánica.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$28.50</span>
+                                    <button class="btn btn-primary btn-sm">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 3 -->
+                    <div class="col-md-3">
+                        <div class="card product-card h-100">
+                            <img src="https://cdn.pixabay.com/photo/2024/07/05/18/03/aromatherapy-8875376_960_720.png" 
+                                 class="card-img-top" alt="Aceite Lavanda">
+                            <div class="card-body">
+                                <h5 class="card-title">Aceite de Lavanda</h5>
+                                <p class="card-text">Calma y relajación natural.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$18.75</span>
+                                    <button class="btn btn-primary btn-sm">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Producto 4 -->
+                    <div class="col-md-3">
+                        <div class="card product-card h-100">
+                            <img src="https://images.pexels.com/photos/227908/pexels-photo-227908.jpeg?_gl=1*19slss9*_ga*NTI4MzE5MDcxLjE3NjgzNjYxMTc.*_ga_8JE65Q40S6*czE3NjgzNjYxMTckbzEkZzEkdDE3NjgzNjcwOTckajM4JGwwJGgw" 
+                                 class="card-img-top" alt="Té Verde">
+                            <div class="card-body">
+                                <h5 class="card-title">Té Verde Orgánico</h5>
+                                <p class="card-text">Antioxidantes naturales premium.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$15.99</span>
+                                    <button class="btn btn-primary btn-sm">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Grupo 2 (más productos) -->
+            <div class="carousel-item">
+                <div class="row g-4">
+                    <!-- Productos adicionales aquí -->
+                    <div class="col-md-3">
+                        <div class="card product-card h-100">
+                            <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" 
+                                 class="card-img-top" alt="Otro Producto">
+                            <div class="card-body">
+                                <h5 class="card-title">Producto 5</h5>
+                                <p class="card-text">Descripción del producto.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price">$25.99</span>
+                                    <button class="btn btn-primary btn-sm">Añadir</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Agrega más productos... -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark p-3 rounded-circle"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark p-3 rounded-circle"></span>
+        </button>
+    </div>
+</div>
+            
+            <div class="row" id="productGrid">
+                <!-- Los productos se cargan dinámicamente -->
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary">Ver Catálogo Completo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Confianza -->
+    <section class="py-5 bg-white" id="nosotros">
+        <div class="container">
+            <div class="row align-items-center mb-5">
+                <div class="col-lg-6">
+                    <h2 class="section-title mb-4">Confianza y Experiencia desde 2005</h2>
+                    <p>En VidaNatural combinamos el conocimiento ancestral con la investigación científica moderna para ofrecer productos de la más alta calidad.</p>
+                    <p>Nuestro equipo de expertos en naturopatía, nutrición y farmacología botánica garantiza que cada producto cumpla con los más altos estándares de eficacia y seguridad.</p>
+                    <a href="#" class="btn btn-primary mt-3">Conoce a Nuestro Equipo</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row text-center mt-4 mt-lg-0">
+                        <div class="col-6 mb-4">
+                            <i class="bi bi-award display-4 text-primary"></i>
+                            <h4 class="mt-3">20+ Años</h4>
+                            <p>De experiencia</p>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <i class="bi bi-people display-4 text-primary"></i>
+                            <h4 class="mt-3">15,000+</h4>
+                            <p>Clientes satisfechos</p>
+                        </div>
+                        <div class="col-6">
+                            <i class="bi bi-shield-check display-4 text-primary"></i>
+                            <h4 class="mt-3">Certificado</h4>
+                            <p>ARCSA y Orgánico</p>
+                        </div>
+                        <div class="col-6">
+                            <i class="bi bi-tree display-4 text-primary"></i>
+                            <h4 class="mt-3">Sostenible</h4>
+                            <p>Compromiso ecológico</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+<!-- Carrusel de Testimonios (reemplaza tu sección actual de testimonios) -->
+<section class="py-5 bg-white" id="testimonios">
+    <div class="container">
+        <h3 class="section-title text-center mb-5">Lo que Dicen Nuestros Clientes</h3>
+        
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                
+                <!-- Testimonio 1 -->
+                <div class="carousel-item active">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card text-center p-4 p-md-5">
+                                <div class="testimonial-img mb-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKkbFv2lSkh3DWKPpUFqz2R7JnBqKqnYx4ME1EqjSgBQ&s" 
+                                         class="rounded-circle shadow" width="100" alt="Cliente">
+                                </div>
+                                <div class="stars mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="testimonial-text lead">"Los productos para control de peso cambiaron mi vida. Perdí 8 kg en 3 meses de forma natural y sin efecto rebote. El servicio al cliente es excelente."</p>
+                                <h5 class="testimonial-author mt-4">Karla Banchón</h5>
+                                <p class="text-muted">Cliente desde 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonio 2 -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card text-center p-4 p-md-5">
+                                <div class="testimonial-img mb-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-jMX5A1xXXjMdi9uGvJjntqzO8kBpyO8bcZQ61R5uBA&s" 
+                                         class="rounded-circle shadow" width="100" alt="Cliente">
+                                </div>
+                                <div class="stars mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-half text-warning"></i>
+                                </div>
+                                <p class="testimonial-text lead">"La asesoría personalizada que recibí para mi problema de piel fue excepcional. Los resultados se notaron desde la primera semana. Totalmente recomendado."</p>
+                                <h5 class="testimonial-author mt-4">Jhon Cano</h5>
+                                <p class="text-muted">Cliente desde 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonio 3 -->
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card text-center p-4 p-md-5">
+                                <div class="testimonial-img mb-4">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtjpDV2l1hToTE5b92eEB5oWAmXqbc6p_BtwYfqTedcA&s" 
+                                         class="rounded-circle shadow" width="100" alt="Cliente">
+                                </div>
+                                <div class="stars mb-3">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                </div>
+                                <p class="testimonial-text lead">"Compro regularmente los suplementos para mi familia. La calidad es excepcional y notamos la diferencia en nuestra energía y salud general."</p>
+                                <h5 class="testimonial-author mt-4">Wendy Macías</h5>
+                                <p class="text-muted">Cliente desde 2026</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Indicadores -->
+            <div class="carousel-indicators position-relative mt-4 justify-content-center">
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2"></button>
+            </div>
+        </div>
+    </div>
+</section>
+    </section>
+
+    <!-- Blog -->
+    <section class="py-5" id="blog">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Consejos de Salud Natural</h2>
+            
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card border-0 h-100">
+                        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="card-img-top" alt="Alimentos saludables">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Nutrición</span>
+                            <h5 class="card-title">5 Superalimentos que Debes Incluir en tu Dieta 2026</h5>
+                            <p class="card-text">Descubre los alimentos con mayor densidad nutricional para potenciar tu salud este año.</p>
+                            <a href="#" class="btn btn-link p-0 text-primary">Leer más <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card border-0 h-100">
+                        <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="card-img-top" alt="Meditación">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Bienestar</span>
+                            <h5 class="card-title">Técnicas Naturales para Reducir el Estrés en la Era Digital</h5>
+                            <p class="card-text">Métodos efectivos basados en la naturaleza para combatir el estrés tecnológico.</p>
+                            <a href="#" class="btn btn-link p-0 text-primary">Leer más <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card border-0 h-100">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="card-img-top" alt="Piel saludable">
+                        <div class="card-body">
+                            <span class="badge bg-primary mb-2">Cuidado Personal</span>
+                            <h5 class="card-title">Rutina de Cuidado de la Piel 100% Natural y Efectiva</h5>
+                            <p class="card-text">Aprende a cuidar tu piel con ingredientes naturales sin químicos agresivos.</p>
+                            <a href="#" class="btn btn-link p-0 text-primary">Leer más <i class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-primary">Ver Todos los Artículos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contacto">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="mb-4"><i class="bi bi-flower1 me-2"></i>VidaNatural</h4>
+                    <p class="mb-4">Tu centro naturista de confianza desde 2024. Productos naturales certificados con respaldo científico.</p>
+                    <div class="footer-certifications">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/USDA_Organic_seal.svg/120px-USDA_Organic_seal.svg.png" 
+                             alt="Certificación Orgánica" class="img-fluid">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Leaping_Bunny_logo.svg/120px-Leaping_Bunny_logo.svg.png" 
+                             alt="Cruelty Free" class="img-fluid">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/ARCSA_Logo.svg/120px-ARCSA_Logo.svg.png" 
+                             alt="ARCSA" class="img-fluid">
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="mb-4">Productos</h5>
+                    <div class="footer-links">
+                        <a href="#">Control de Peso</a>
+                        <a href="#">Cuidado de la Piel</a>
+                        <a href="#">Anti-estrés</a>
+                        <a href="#">Suplementos</a>
+                        <a href="#">Productos Orgánicos</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Información</h5>
+                    <div class="footer-links">
+                        <a href="#">Sobre Nosotros</a>
+                        <a href="#">Blog de Salud</a>
+                        <a href="#">Preguntas Frecuentes</a>
+                        <a href="#">Términos y Condiciones</a>
+                        <a href="#">Aviso de Privacidad</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="mb-4">Contacto</h5>
+                    <div class="footer-links">
+                        <p><i class="bi bi-geo-alt me-2"></i> Av. Guayasamin Oe1-125, Quito, Ecuador</p>
+                        <p><i class="bi bi-telephone me-2"></i> +593 987307501</p>
+                        <p><i class="bi bi-envelope me-2"></i> info@vidanatural.com</p>
+                        <p><i class="bi bi-clock me-2"></i> Lun-Vie: 9:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row pt-4 mt-4 border-top">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2026 VidaNatural.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">
+                        <span class="text-warning fw-bold">ADVERTENCIA:</span> 
+                        Los productos naturales pueden tener contraindicaciones. Consulte a su médico antes de usarlos. 
+                        Si los síntomas persisten, consulte a su especialista.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript Personalizado -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

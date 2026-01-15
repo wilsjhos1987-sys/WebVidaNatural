@@ -1,0 +1,416 @@
+:root {
+    --verde-primario: #2a6b4a;
+    --verde-secundario: #4a9d6e;
+    --tierra-claro: #d7ccc8;
+    --tierra-medio: #a1887f;
+    --tierra-oscuro: #5d4037;
+    --blanco: #ffffff;
+    --gris-claro: #f8f9fa;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: var(--gris-claro);
+}
+
+/* Header y Navegación */
+.navbar {
+    background-color: var(--blanco);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--verde-primario) !important;
+}
+
+.navbar-brand i {
+    color: var(--verde-secundario);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--tierra-oscuro) !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--verde-primario) !important;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(rgba(42, 107, 74, 0.85), rgba(42, 107, 74, 0.9)), 
+                url('https://images.unsplash.com/photo-1543362906-acfc16c67564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 0;
+    margin-bottom: 40px;
+}
+
+/* Secciones */
+.section-title {
+    color: var(--verde-primario);
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--verde-secundario);
+}
+
+.section-title.text-center:after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Tarjetas de Productos */
+.product-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 25px;
+    background-color: white;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-img {
+    height: 200px;
+    object-fit: cover;
+    background-color: #f8f9fa;
+}
+
+.product-category {
+    color: var(--verde-secundario);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.product-price {
+    color: var(--verde-primario);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--verde-primario);
+    border-color: var(--verde-primario);
+    padding: 10px 25px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background-color: var(--verde-secundario);
+    border-color: var(--verde-secundario);
+}
+
+.btn-outline-primary {
+    color: var(--verde-primario);
+    border-color: var(--verde-primario);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--verde-primario);
+    border-color: var(--verde-primario);
+}
+
+/* Testimonios */
+.testimonial-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100%;
+}
+
+.testimonial-text {
+    font-style: italic;
+    color: var(--tierra-oscuro);
+}
+
+.testimonial-author {
+    color: var(--verde-primario);
+    font-weight: 600;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--tierra-oscuro);
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-links a {
+    color: var(--tierra-claro);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-certifications img {
+    max-height: 50px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+/* Carrito Flotante */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background-color: white;
+    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1050;
+    transition: right 0.3s ease;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.cart-sidebar.open {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1040;
+    display: none;
+}
+
+.cart-overlay.active {
+    display: block;
+}
+
+/* WhatsApp Button */
+.whatsapp-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+    
+    .cart-sidebar {
+        width: 100%;
+        right: -100%;
+    }
+}
+
+/* Badges */
+.badge-natural {
+    background-color: var(--verde-secundario);
+    color: white;
+}
+
+.badge-organic {
+    background-color: #8BC34A;
+    color: white;
+}
+
+.badge-vegan {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Blog Card Images */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+/* ========== ESTILOS PARA CARRUSEL ========== */
+
+/* Carrusel Hero */
+.carousel-hero {
+    margin-top: 76px; /* Compensa el navbar fijo */
+}
+
+.hero-slide {
+    height: 70vh;
+    min-height: 500px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+.min-vh-70 {
+    min-height: 70vh;
+}
+
+/* Indicadores del carrusel */
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    margin: 0 5px;
+}
+
+.carousel-indicators button.active {
+    background-color: var(--verde-secundario);
+}
+
+/* Controles del carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
+}
+
+/* Carrusel de productos destacados */
+.carousel-control-custom .carousel-control-prev-icon,
+.carousel-control-custom .carousel-control-next-icon {
+    background-size: 60%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-slide {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .carousel-control-prev {
+        left: 10px;
+    }
+    
+    .carousel-control-next {
+        right: 10px;
+    }
+}
+
+/* Animaciones para el carrusel */
+.carousel-item {
+    transition: transform 0.6s ease-in-out;
+}
+
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+/* Estilos específicos para testimonios en carrusel */
+#testimonios .testimonial-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    border: 1px solid rgba(42, 107, 74, 0.1);
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+#testimonios .testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+#testimonios .testimonial-img img {
+    border: 3px solid var(--verde-secundario);
+    padding: 3px;
+}
+
+#testimonios .carousel-indicators button {
+    width: 40px;
+    height: 5px;
+    border-radius: 2px;
+    background-color: #dee2e6;
+}
+
+#testimonios .carousel-indicators button.active {
+    background-color: var(--verde-primario);
+}
+
+/* Estilos para productos en carrusel */
+.product-card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-img {
+    height: 200px;
+    object-fit: cover;
+}
