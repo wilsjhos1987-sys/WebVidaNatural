@@ -57,7 +57,7 @@
 ];
 *//
 /* 1. Cargar productos desde el servlet */
-const API = 'http://localhost:8080/VidaNaturalAPI/api/productos';
+const API = 'https://wilsjhos1987-sys.github.io/WebVidaNatural/';
 
 let products = [];   // lo llenaremos con el fetch
 
@@ -149,3 +149,4 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = { products, renderProducts, getCategoryName };
 
 }
+
