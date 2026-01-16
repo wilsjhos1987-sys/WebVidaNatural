@@ -1,5 +1,5 @@
 // Datos de productos
-const products = [
+/** const products = [
     {
         id: 1,
         name: "Quemador Natural Premium",
@@ -55,7 +55,29 @@ const products = [
         badges: ["organic", "natural", "vegan"]
     }
 ];
+*//
+/* 1. Cargar productos desde el servlet */
+const API = 'http://localhost:8080/VidaNaturalAPI/api/productos';
 
+let products = [];   // lo llenaremos con el fetch
+
+fetch(API)
+  .then(r => r.json())
+  .then(lista => {
+    /* 2. Adaptamos los nombres del servlet a los que ya usas */
+    products = lista.map(p => ({
+      id:          p.id,
+      name:        p.nombre,
+      category:    p.categoria   || 'organico',   // si tu tabla no tiene categoria, ponemos uno por defecto
+      price:       p.precio,
+      image:       p.imagen,
+      description: p.descripcion,
+      badges:      ['natural']                   // o el que quieras
+    }));
+    /* 3. Una vez cargados, pintamos */
+    renderProducts('all');
+  })
+  .catch(err => console.error('Error al cargar productos:', err));
 // Obtener nombre de categoría
 function getCategoryName(category) {
     const categoryNames = {
@@ -125,4 +147,5 @@ function renderProducts(filter = 'all') {
 // Exportar para uso en otros archivos
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { products, renderProducts, getCategoryName };
+
 }
