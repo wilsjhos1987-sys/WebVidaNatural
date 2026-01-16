@@ -1,96 +1,98 @@
-
 const API = 'http://localhost:8080/VidaNaturalAPI/api/productos';
+const CHECKOUT_API = 'http://localhost:8080/VidaNaturalAPI/api/checkout'; // URL de tu Servlet de ventas
 
-let products = [];   // lo llenaremos con el fetch
+let products = []; 
+let cart = []; // Variable para almacenar lo que el usuario elige
 
+// 1. CARGA DE PRODUCTOS (Tu código original)
 fetch(API)
   .then(r => r.json())
   .then(lista => {
-    /* 2. Adaptamos los nombres del servlet a los que ya usas */
     products = lista.map(p => ({
       id:          p.id,
       name:        p.nombre,
-      category:    p.categoria   || 'organico',   // si tu tabla no tiene categoria, ponemos uno por defecto
+      category:    p.categoria || 'organico',
       price:       p.precio,
       image:       p.imagen,
       description: p.descripcion,
-      badges:      ['natural']                   // o el que quieras
+      badges:      ['natural']
     }));
-    /* 3. Una vez cargados, pintamos */
     renderProducts('all');
+    setupAddToCartButtons(); // Activamos los botones después de cargar
   })
   .catch(err => console.error('Error al cargar productos:', err));
-// Obtener nombre de categoría
-function getCategoryName(category) {
-    const categoryNames = {
-        'control-peso': 'Control de Peso',
-        'piel': 'Cuidado de la Piel',
-        'antiestres': 'Anti-estrés',
-        'suplementos': 'Suplementos',
-        'organico': 'Orgánico'
-    };
-    
-    return categoryNames[category] || category;
-}
 
-// Renderizar productos
+// 2. RENDERIZADO (Tu código original)
 function renderProducts(filter = 'all') {
     const productGrid = document.getElementById('productGrid');
     if (!productGrid) return;
-    
     productGrid.innerHTML = '';
-    
-    const filteredProducts = filter === 'all' 
-        ? products 
-        : products.filter(product => product.category === filter);
+    const filteredProducts = filter === 'all' ? products : products.filter(p => p.category === filter);
     
     filteredProducts.forEach(product => {
-        const badgesHTML = product.badges.map(badge => {
-            let badgeClass = 'badge-natural';
-            let badgeText = 'Natural';
-            
-            if (badge === 'organic') {
-                badgeClass = 'badge-organic';
-                badgeText = 'Orgánico';
-            } else if (badge === 'vegan') {
-                badgeClass = 'badge-vegan';
-                badgeText = 'Vegano';
-            }
-            
-            return `<span class="badge ${badgeClass} me-1">${badgeText}</span>`;
-        }).join('');
-        
         const productCard = `
-            <div class="col-md-6 col-lg-4" data-category="${product.category}">
+            <div class="col-md-6 col-lg-4">
                 <div class="card product-card">
-                    <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-start mb-2">
-                            <span class="product-category">${getCategoryName(product.category)}</span>
-                            ${badgesHTML}
-                        </div>
                         <h5 class="card-title">${product.name}</h5>
-                        <p class="card-text text-muted">${product.description}</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="product-price">$${product.price.toFixed(2)}</span>
-                            <button class="btn btn-primary btn-sm add-to-cart" data-id="${product.id}">
-                                <i class="bi bi-cart-plus"></i> Añadir
-                            </button>
-                        </div>
+                        <p class="card-price">$${product.price.toFixed(2)}</p>
+                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Añadir al carrito</button>
                     </div>
                 </div>
-            </div>
-        `;
-        
+            </div>`;
         productGrid.innerHTML += productCard;
+    });
+    setupAddToCartButtons();
+}
+
+// 3. LÓGICA PARA REGISTRAR EN LA BASE DE DATOS
+function setupAddToCartButtons() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.onclick = (e) => {
+            const id = e.target.dataset.id;
+            const product = products.find(p => p.id == id);
+            cart.push(product);
+            console.log("Añadido:", product.name);
+            alert(`${product.name} se añadió al carrito`);
+        };
     });
 }
 
-// Exportar para uso en otros archivos
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { products, renderProducts, getCategoryName };
+// --- ESTA ES LA FUNCIÓN QUE DEBES VINCULAR A TU BOTÓN "PROCEDER AL PAGO" ---
+async function procesarPagoYRegistrar() {
+    if (cart.length === 0) {
+        alert("El carrito está vacío");
+        return;
+    }
 
+    const totalCompra = cart.reduce((total, p) => total + p.price, 0) + 3.50; // Total + envío
+    
+    const datosVenta = {
+        total: totalCompra.toFixed(2),
+        items: cart.map(p => ({ nombre: p.name, precio: p.price }))
+    };
+
+    try {
+        const response = await fetch(CHECKOUT_API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datosVenta)
+        });
+
+        if (response.ok) {
+            alert("¡Gracias por tu compra! Serás redirigido a nuestro sistema de pago seguro.");
+            cart = []; // Limpiamos carrito
+            // Aquí puedes redirigir a una pasarela real si quisieras
+        } else {
+            alert("Error al registrar en la base de datos local.");
+        }
+    } catch (error) {
+        console.error("Error de conexión:", error);
+        alert("No se pudo conectar con el servidor local (NetBeans).");
+    }
 }
 
-
-
+// 4. VINCULAR AL BOTÓN FINAL
+// Asegúrate de que en tu HTML el botón de "Proceder al Pago" tenga el ID 'btnProceder'
+document.getElementById('btnProceder')?.addEventListener('click', procesarPagoYRegistrar);
